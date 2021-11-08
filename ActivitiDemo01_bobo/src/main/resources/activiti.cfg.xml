@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration" id="processEngineConfiguration">
+        <property name="jdbcDriver" value="com.mysql.cj.jdbc.Driver" />
+        <!--nullCatalogMeansCurrent=true是防止找其他库的同表名，因为mysqlconnector8使用schema标识库名而不是catalog，因此mysql会扫描所有的库来找表，如果其他库中有相同名称的表，activiti就以为找到了，本质上这个表在当前数据库中并不存在。&amp; 在xml中等价与在string中设置&-->
+        <property name="jdbcUrl" value="jdbc:mysql:///my-studydb-02?characterEncoding=utf-8&amp;nullCatalogMeansCurrent=true&amp;serverTimezone=UTC"/>
+        <property name="jdbcUsername" value="root"/>
+        <property name="jdbcPassword" value="1230123"/>
+        <property name="jdbcMaxActiveConnections" value="3" />
+        <property name="jdbcMaxIdleConnections" value="2" />
+        <!--若表不存在则主动创建-->
+        <property name="databaseSchemaUpdate" value="true" />
+
+        <!--引用下面的数据源，上面已写数据库信息则不需要再引用-->
+        <!--<property name="dataSource" ref="dataSource" />-->
+    </bean>
+
+    <!--主动创建数据源-->
+<!--        <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
+            <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql:///my-studydb?characterEncoding=utf-8&amp;nullCatalogMeansCurrent=true&amp;serverTimezone=UTC"/>
+            <property name="username" value="root"/>
+            <property name="password" value="123456"/>
+            <property name="maxActive" value="3"/>
+            <property name="maxIdle" value="2"/>
+        </bean>-->
+</beans>
