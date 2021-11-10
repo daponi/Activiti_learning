@@ -14,6 +14,7 @@ buildNumber.properties
 /.gradle/
 /.idea/
 /out/
+
 target/
 /.settings/
 /build/
@@ -22,5 +23,6 @@ target/
 .project
 *.iml
 indexDir/
+*.log
 
 docker/*.jar
