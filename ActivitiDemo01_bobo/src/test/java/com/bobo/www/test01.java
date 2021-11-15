@@ -203,7 +203,7 @@ public class test01 {
      * 流程资源的下载
      * 此处发现问题，
      * 1.需要以bpmn或者bpmn20.xml结尾的资源内容才会去部署流程 【解决】
-     * 2.我部署后act_re_procdef表插入的数据里DGRM_RESOURCE_NAME_字段没有插入.png【未解决】
+     * 2.我部署后act_re_procdef表插入的数据里DGRM_RESOURCE_NAME_字段没有插入.png【解决，重启后过几天自然好了？时好时坏】
      */
     @Test
     public void test10() throws IOException {

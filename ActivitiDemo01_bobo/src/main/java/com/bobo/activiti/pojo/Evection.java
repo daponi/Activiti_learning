@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * 出差申请的POJO对象
+ * 需要实现Serializable接口
  */
 @Data
 public class Evection implements Serializable {
