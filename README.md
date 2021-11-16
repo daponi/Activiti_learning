@@ -4,6 +4,11 @@
 波波
 B站:https://www.bilibili.com/video/BV1t64y147v4
 
+学习资料，放在DocumentData文件夹
+
+笔记：https://www.yuque.com/bugming/bisb0e/zui5pu
+
+eclipse的actiBPMN插件放在网盘上
 #### 软件架构
 软件架构说明
 
