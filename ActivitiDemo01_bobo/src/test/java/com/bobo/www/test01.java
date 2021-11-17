@@ -51,7 +51,7 @@ public class test01 {
      * 实现文件的单个部署
      */
     @Test
-    public void test03(){
+    public void test03() {
         //定义log4j日志文件的位置为当前项目路径
         String rootPath = System.getProperty("user.dir");
         System.setProperty("logPath", rootPath);
@@ -68,9 +68,9 @@ public class test01 {
                 .key("evection002")
                 .deploy();// 部署流程
 
-        System.out.println("部署的ID:"+deploy.getId());
-        System.out.println("部署的name:"+deploy.getName());
-        System.out.println("部署的key:"+deploy.getKey());
+        System.out.println("部署的ID:" + deploy.getId());
+        System.out.println("部署的name:" + deploy.getName());
+        System.out.println("部署的key:" + deploy.getKey());
 
     }
 
@@ -78,7 +78,7 @@ public class test01 {
      * 通过一个zip文件来部署操作
      */
     @Test
-    public void test04(){
+    public void test04() {
         // 定义zip文件的输入流inputStream
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("activiti/activiti.zip");
         // 对 inputStream 做装饰
@@ -94,8 +94,8 @@ public class test01 {
                 .name("出差申请流程2")
                 .deploy();
         // 4.输出流程部署的信息
-        System.out.println("部署的ID:"+deploy.getId());
-        System.out.println("部署的name:"+deploy.getName());
+        System.out.println("部署的ID:" + deploy.getId());
+        System.out.println("部署的name:" + deploy.getName());
 
     }
 
@@ -103,13 +103,13 @@ public class test01 {
      * 启动一个流程实例
      */
     @Test
-    public void test05(){
+    public void test05() {
         // 1.创建ProcessEngine对象
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         // 2.获取RuntimeService对象
         RuntimeService runtimeService = engine.getRuntimeService();
         // 3.根据流程定义的id启动流程String id= "evection";
-        String key ="evection";
+        String key = "evection";
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(key);
         // 4.输出相关的流程实例信息
         System.out.println("流程定义的ID：" + processInstance.getProcessDefinitionId());
@@ -122,7 +122,7 @@ public class test01 {
      * 任务/节点查询
      */
     @Test
-    public void test06(){
+    public void test06() {
         String assignee = "zhangsan";
         String key = "evection";
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
@@ -143,7 +143,7 @@ public class test01 {
      * 流程任务处理
      */
     @Test
-    public void test07(){
+    public void test07() {
         String assignee = "lisi";
         String key = "evection";
 
@@ -163,7 +163,7 @@ public class test01 {
      * 查询流程的定义
      */
     @Test
-    public void test08(){
+    public void test08() {
         String key = "evection";
 
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -190,7 +190,7 @@ public class test01 {
      * 删除流程
      */
     @Test
-    public void test09(){
+    public void test09() {
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
         // 非级联删除流程定义，如果该流程定义已经有了流程实例启动则删除时报错
@@ -199,6 +199,7 @@ public class test01 {
         //repositoryService.deleteDeployment("12501",true)
         System.out.println("成功删除流程");
     }
+
     /**
      * 流程资源的下载
      * 此处发现问题，
@@ -220,18 +221,18 @@ public class test01 {
         String deploymentId = processDefinition.getDeploymentId();
         // 5.通过repositoryService对象的相关方法 来获取图片信息和bpmn信息
         // png图片的流
-        InputStream pngInput = repositoryService.getResourceAsStream(deploymentId,processDefinition.getDiagramResourceName());
+        InputStream pngInput = repositoryService.getResourceAsStream(deploymentId, processDefinition.getDiagramResourceName());
         //bpmn文件的流
         InputStream bpmnInput = repositoryService.getResourceAsStream(deploymentId, processDefinition.getResourceName());
         // 6.文件的保存  ./相当于System.getProperty("user.dir")， ../相当于System.getProperty("user.dir")的上层
         File filePng = new File("./logs/evection.png");
-        File fileBpmn = new File(System.getProperty("user.dir") +"/logs/evection.bpmn20.xml");
+        File fileBpmn = new File(System.getProperty("user.dir") + "/logs/evection.bpmn20.xml");
         //建立输出流
         FileOutputStream pngOutput = new FileOutputStream(filePng);
         FileOutputStream bpmnOutput = new FileOutputStream(fileBpmn);
         //将输入流复制到输出流
-        IOUtils.copy(pngInput,pngOutput);
-        IOUtils.copy(bpmnInput,bpmnOutput);
+        IOUtils.copy(pngInput, pngOutput);
+        IOUtils.copy(bpmnInput, bpmnOutput);
 
         //7.关闭流
         pngInput.close();
@@ -239,11 +240,12 @@ public class test01 {
         bpmnInput.close();
         bpmnOutput.close();
     }
+
     /**
      * 流程历史信息查看
      */
     @Test
-    public void test11(){
+    public void test11() {
         String key = "evection";
 
         // 1.得到ProcessEngine对象
@@ -267,11 +269,11 @@ public class test01 {
         List<HistoricActivityInstance> list = instanceQuery.list();
         for (HistoricActivityInstance hist : list) {
 
-            System.out.println("节点名称："+hist.getActivityName());
-            System.out.println("节点类型："+hist.getActivityType());
-            System.out.println("节点处理人："+hist.getAssignee());
-            System.out.println("流程定义ID："+hist.getProcessDefinitionId());
-            System.out.println("流程实例ID："+hist.getProcessInstanceId());
+            System.out.println("节点名称：" + hist.getActivityName());
+            System.out.println("节点类型：" + hist.getActivityType());
+            System.out.println("节点处理人：" + hist.getAssignee());
+            System.out.println("流程定义ID：" + hist.getProcessDefinitionId());
+            System.out.println("流程实例ID：" + hist.getProcessInstanceId());
             System.out.println("______________________________");
         }
 

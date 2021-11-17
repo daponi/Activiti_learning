@@ -14,7 +14,7 @@ public class Test06Group {
      * 流程部署
      */
     @Test
-    public void test01(){
+    public void test01() {
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = engine.getRepositoryService();
         Deployment deploy = repositoryService.createDeployment()
@@ -30,12 +30,12 @@ public class Test06Group {
      * 启动流程实例
      */
     @Test
-    public void test02(){
+    public void test02() {
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = engine.getRuntimeService();
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("evection1");
         // 4.输出流程部署的信息
-        System.out.println("获取流程实例名称："+processInstance.getName());
+        System.out.println("获取流程实例名称：" + processInstance.getName());
         System.out.println("流程定义ID：" + processInstance.getProcessDefinitionId());
     }
 
@@ -43,7 +43,7 @@ public class Test06Group {
      * 查询组任务
      */
     @Test
-    public void test03(){
+    public void test03() {
         String key = "evection1";
         String candidateUser = "lisi";
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
@@ -66,7 +66,7 @@ public class Test06Group {
      * 候选人 拾取任务
      */
     @Test
-    public void test04(){
+    public void test04() {
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         TaskService taskService = engine.getTaskService();
         String taskId = "65002";
@@ -77,9 +77,9 @@ public class Test06Group {
                 .taskId(taskId)
                 .taskCandidateUser(userId) // 根据候选人查询
                 .singleResult();
-        if(task != null){
+        if (task != null) {
             // 可以拾取任务
-            taskService.claim(taskId,userId);
+            taskService.claim(taskId, userId);
             System.out.println("拾取成功");
         }
     }
@@ -88,8 +88,8 @@ public class Test06Group {
      * 完成个人任务
      */
     @Test
-    public void test05(){
-        String  taskId = "62505";
+    public void test05() {
+        String taskId = "62505";
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         TaskService taskService = engine.getTaskService();
         taskService.complete(taskId);
@@ -100,18 +100,18 @@ public class Test06Group {
      * 归还任务
      */
     @Test
-    public void test06(){
+    public void test06() {
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         TaskService taskService = engine.getTaskService();
         String taskId = "65002";
-        String userId= "lisi";
+        String userId = "lisi";
         Task task = taskService.createTaskQuery()
                 .taskId(taskId)
                 .taskAssignee(userId)
                 .singleResult();
-        if(task != null){
+        if (task != null) {
             // 如果设置为null，归还组任务，任务没有负责人
-            taskService.setAssignee(taskId,null);
+            taskService.setAssignee(taskId, null);
             System.out.println("成功归还任务");
         }
     }
@@ -120,18 +120,18 @@ public class Test06Group {
      * 任务交接
      */
     @Test
-    public void test07(){
+    public void test07() {
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         TaskService taskService = engine.getTaskService();
         String taskId = "65002";
-        String userId= "zhangsan";
+        String userId = "zhangsan";
         Task task = taskService.createTaskQuery()
                 .taskId(taskId)
                 .taskAssignee(userId)
                 .singleResult();
-        if(task != null){
+        if (task != null) {
             // 任务交接，设置该任务的新的负责人,
-            taskService.setAssignee(taskId,"赵六");
+            taskService.setAssignee(taskId, "赵六");
             System.out.println("成功交接任务");
 
         }

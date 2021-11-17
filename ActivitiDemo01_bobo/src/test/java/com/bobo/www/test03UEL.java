@@ -19,7 +19,7 @@ public class test03UEL {
      * 先将新定义的流程部署到Activiti中数据库中
      */
     @Test
-    public void test01(){
+    public void test01() {
         // 1.获取ProcessEngine对象
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         // 2.获取RepositoryService进行部署操作
@@ -41,18 +41,18 @@ public class test03UEL {
      * 会在act_ru_variable表里插入表达式数据
      */
     @Test
-    public void test02(){
+    public void test02() {
         // 获取流程引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         // 获取RuntimeService对象
         RuntimeService runtimeService = processEngine.getRuntimeService();
         // 设置 assignee 的取值，
-        Map<String,Object> map = new HashMap<>();
-        map.put("assignee0","张三");
-        map.put("assignee1","李四");
-        map.put("assignee2","王五");
-        map.put("assignee3","赵财务");
+        Map<String, Object> map = new HashMap<>();
+        map.put("assignee0", "张三");
+        map.put("assignee1", "李四");
+        map.put("assignee2", "王五");
+        map.put("assignee3", "赵财务");
         // 创建流程实例
-        runtimeService.startProcessInstanceByKey("evection-uel",map);
+        runtimeService.startProcessInstanceByKey("evection-uel", map);
     }
 }

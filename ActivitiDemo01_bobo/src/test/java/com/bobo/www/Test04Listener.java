@@ -16,7 +16,7 @@ public class Test04Listener {
      * 先将新定义的流程部署到Activiti中数据库中
      */
     @Test
-    public void test01(){
+    public void test01() {
         // 1.获取ProcessEngine对象
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         // 2.获取RepositoryService进行部署操作
@@ -34,11 +34,11 @@ public class Test04Listener {
 
     /**
      * 创建一个流程实例
-     *    给流程定义中的 UEL表达式赋值
+     * 给流程定义中的 UEL表达式赋值
      */
     @Test
-    public void test02(){
-      // 获取流程引擎
+    public void test02() {
+        // 获取流程引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         // 获取RuntimeService对象
         RuntimeService runtimeService = processEngine.getRuntimeService();
